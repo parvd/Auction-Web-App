@@ -124,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         }
         else{
-            echo "Fuck krina";
+            echo "Fuck ";
         }
         echo "<table>";
         echo "<tr>";
@@ -145,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     else
     {
-        echo "bye Krina";
+        echo "bye bye no connection";
     }
     
 }
