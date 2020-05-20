@@ -78,21 +78,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $result = $stmt->get_result();
         $val = $result->fetch_assoc();
         $userid1= $val['id'];
-        //echo $userid1;
-        $sql= "INSERT INTO bid_registration(bid_id,product_id,product_i_price,user_id) VALUES (?,?,?,?)";
-       if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "ssds", $param_bid_id,$param_product_id, $param_product_price,$param_user_id);
+        echo $userid1;
+        $sql= "INSERT INTO bid_registration(bid_id,product_id,product_i_price,username) VALUES (?,?,?,?)";
+       if($stmt9 = mysqli_prepare($link, $sql)){
+            mysqli_stmt_bind_param($stmt9, "ssds", $param_bid_id,$param_product_id, $param_product_price,$param_user_name);
             $param_bid_id=$bidid;
             $param_product_id= $productid;
             $param_product_price=$price;
-            $param_user_id=$userid1;
+            $param_user_name=$usern1;
             
-            if(mysqli_stmt_execute($stmt)){
+            if(mysqli_stmt_execute($stmt9)){
                 // Redirect to login page
-                echo "Bid insert done";
+                echo "Bid insert done"."<br>";
 
             } else{
-                echo "Bid insert error";
+                echo "Bid insert error"."<br>";
             }
         }
         else
@@ -101,21 +101,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     
     //product insert
-    $prosql="INSERT INTO product (product_id,product_name,product_category,product_description,product_cost,product_image) VALUES (?,?,?,?,?,'$image')";
+    $prosql="INSERT INTO product (product_id,product_name,product_category,product_description,product_cost,product_image) VALUES (?,?,?,?,?,?)";
         
     if($stmt2 = mysqli_prepare($link, $prosql)){
-        mysqli_stmt_bind_param($stmt2, "sssss",$param_product_id, $param_product_name,$param_category,$param_description,$param_cost);
+        mysqli_stmt_bind_param($stmt2, "sssssb",$param_product_id, $param_product_name,$param_category,$param_description,$param_cost,$param_my_image);
         $param_product_id=$productid;
         $param_product_name=$product;
         $param_category=$selected_val;
         $param_description=$comment;
         $param_cost=$price;
+        $param_my_image=$image;
         
         if(mysqli_stmt_execute($stmt2)){
             // Redirect to login page 
             echo "Product Insert done";
             echo "<br>";
-           //$ = "SELECT product_image from product where product_id={?} limit 1"; 
+        //$ = "SELECT product_image from product where product_id={?} limit 1"; 
         $res=mysqli_query($link,"SELECT product_image from product where product_id={$productid}");
         echo var_dump($res);
         if($res==TRUE)
@@ -150,7 +151,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
 }
     
-    
+
     
 ?>
 
