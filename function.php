@@ -93,33 +93,10 @@ echo "Invalid Price , Price Must Be Greater than '{$ini_price}' ";
 else
 {
   echo "<br>"."f=".is_null($flag);
-  if($flag>0)
+  if(1)
   {
   echo "Bid Starts...";
-  $sql5="INSERT INTO process (bid_id,username,bid_price) VALUES (?,?,?)";
-  if($stmt5 = mysqli_prepare($link, $sql5))
-  {
-    mysqli_stmt_bind_param($stmt5, "ssi", $param_bidid,$param_username,$param_uprice);
-    $param_bidid=$bidid;
-    $param_username=$usern1;
-    $param_uprice=$price_f;
-    if(mysqli_stmt_execute($stmt5)){
-      // Redirect to login page
-     echo "done insert";
-     $flag=0;
-     $_SESSION["final"]=$flag;
-
-  } else
-  {
-      echo "stmt5 execution error";
-  }
-}
-else
-{
-  echo "error in prepare stmt5";
-}
-}
-else{
+ 
   echo "<br>"."Updating price to '{$price_f}'";
   $sql6="UPDATE process SET bid_price=? WHERE bid_id=? AND username=?";
   if($stmt6 = mysqli_prepare($link, $sql6))
@@ -140,14 +117,14 @@ else{
  else{
   echo "error in prepare stmt6";
  }
+
+
+
+
+  }
+ }
+
 }
-
-
-}
-
-
-}
-
 echo "flag at starting=".$flag;
 
 ?>
@@ -197,6 +174,9 @@ if (mysqli_stmt_execute($stmt3)) {
   </form>
     <?php
     }
+    
+
+
     ?>
     </td>
 </tr>
@@ -217,27 +197,10 @@ else{
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 }
-else{
+else
+{
 echo "error\n";
-}?>
+}
+?>

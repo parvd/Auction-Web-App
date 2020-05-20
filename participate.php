@@ -91,7 +91,12 @@ if($stmt = mysqli_prepare($link, $sql)){
                 if(mysqli_stmt_execute($stmt2)){
                 // Redirect to login page
                     echo "successfully registered";
-
+                    $sql7="INSERT INTO process (bid_id,username,bid_price) VALUES ('{$bidid}','{$usern1}','0')";
+                    if (mysqli_query($link, $sql7)) {
+                    echo "New record created successfully";
+                    } else {
+                    echo "Error: " . $sql7 . "<br>" . mysqli_error($link);
+                }
                }
                else{
                 echo "participation insertion error";
