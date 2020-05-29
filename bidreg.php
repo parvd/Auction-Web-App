@@ -161,52 +161,67 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="bid.css">
 </head>
 <body>
-<div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+<div class="page-header text-center bg-info mt-0 py-3 mb-3">
+        <h2>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>,</br> Welcome to our site.</h2>
 </div>
-    <div class="wrapper">
-        <h2>Create Bid Form</h2>
-        <p>Please fill this form to create an bid.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group <?php echo (!empty($product_name_err)) ? 'has-error' : ''; ?>">
-                <label>Product</label>
-                <input type="text" name="product" class="form-control" value="<?php echo $product; ?>">
-                <span class="help-block"><?php echo $product_err; ?></span>
-            </div>  
-            <div class="form-group <?php echo (!empty($category_err)) ? 'has-error' : ''; ?>">
-                <label>category</label>
-                <select id="c" name="category">
-                <option value="mobile">Mobile</option>
-                <option value="book">Book</option>
-                <option value="accessories">Accessories</option>
-                <option value="watch">Watch</option>
-                </select>
-                <span class="help-block"><?php echo $category_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($comment_err)) ? 'has-error' : ''; ?>">
-                <label>Description</label>
-                <textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
-                <span class="help-block"><?php echo $comment_err; ?></span>
+    <div class="container">
+        <div class="row align-item-center justify-content-center">
+            <div class="col-8 border">
+                <h2>Create Bid Form</h2>
+                <p class="text-muted">Please fill this form to create an bid.</p>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                    <div class="form-group <?php echo (!empty($product_name_err)) ? 'has-error' : ''; ?>">
+                        <label>Product</label>
+                        <input type="text" name="product" class="form-control" value="<?php echo $product; ?>">
+                        <span class="help-block"><?php echo $product_err; ?></span>
+                    </div>  
+                    <div class="form-group <?php echo (!empty($category_err)) ? 'has-error' : ''; ?>">
+                        <label>category</label>
+                        <select id="c" name="category">
+                        <option value="mobile">Mobile</option>
+                        <option value="book">Book</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="watch">Watch</option>
+                        </select>
+                        <span class="help-block"><?php echo $category_err; ?></span>
+                    </div>    
+                    <div class="form-group <?php echo (!empty($comment_err)) ? 'has-error' : ''; ?>">
+                        <label>Description</label>
+                        <textarea name="comment" class="form-control" rows="4"><?php echo $comment;?></textarea>
+                        <span class="help-block"><?php echo $comment_err; ?></span>
+                    </div>
+                    <div class="form-group <?php echo (!empty($comment_err)) ? 'has-error' : ''; ?>">
+                        <label for="file">File Input</label>
+                        <input type="file" class="form-control-file" name="image" />
+                                
+                    </div>
+                    <div class="text-muted mb-2">
+                        *Uploaded item should be in jpeg/jpg/png format.
+                    </div>
+                    <div class="form-group <?php echo (!empty($price_name_err)) ? 'has-error' : ''; ?>">
+                        <label>Price</label>
+                        <input type="text" name="price" class="form-control" value="<?php echo $price; ?>">
+                        <span class="help-block"><?php echo $price_err; ?></span>
+                    </div>  
+                    <div class="text-muted mb-2">
+                        *please enter price in Indian currency.
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary btn-outline-success text-white" value="Submit">
+                        <input type="reset" class="btn btn-default btn-outline-danger" value="Reset">
+                    </div>
+                </form>
             </div>
-            <div class="form-group <?php echo (!empty($comment_err)) ? 'has-error' : ''; ?>">
-            <input type="file" name="image" />
-            <button>Upload</button>        
-            </div>
-            <div class="form-group <?php echo (!empty($price_name_err)) ? 'has-error' : ''; ?>">
-                <label>Price</label>
-                <input type="text" name="price" class="form-control" value="<?php echo $price; ?>">
-                <span class="help-block"><?php echo $price_err; ?></span>
-            </div>  
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
-            </div>
-        </form>
-    </div>    
+        </div>
+    </div>   
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+ 
 </body>
 </html>
 <?php
