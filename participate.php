@@ -1,6 +1,6 @@
 <?php
 include_once 'config.php';
-require_once 'mailer/class.phpmailer.php';
+//require_once 'mailer/class.phpmailer.php';
 session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
@@ -10,7 +10,7 @@ $productid=$_POST["submit"];
 $usern1=$_SESSION["username"];
 echo "Hello".$usern1."<br>".$productid;
 $pwdgen=uniqid("pwd");
-$mail = new PHPMailer(true);
+//$mail = new PHPMailer(true);
 $sql="SELECT emailid,id from user_t where username=?";
 $sql3="SELECT bid_id from bid_registration where product_id=?";
 if($stmt = mysqli_prepare($link, $sql)){

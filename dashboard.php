@@ -82,38 +82,80 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="mycss.css" >
+<meta name="viewport" content="width=device-width">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
+<!--
+<div class="navbar fixed-top navbar-expand-sm navbar-dark bg-primary text-white mb-5">
+    <div class="container">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav" >
+            <ul class="navbar-nav">
+                  <li class="nav-item btn"><a class="active nav-link" href="#home">Home</a></li>
+                  <li class="nav-item btn"><a class="nav-link" href="#news">News</a></li>
+                  <li class="nav-item btn"><a class="nav-link" href="#contact">Contact</a></li>
+                  <li class="nav-item btn"><a class="nav-link" href="#about">About</a></li>
+            </ul>
+			<button class="btn btn-light ml-auto nav-link" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Bid Login</button>
 
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
-  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Bid Login</button>
+        </div>
+    </div>
+</div>
+-->
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary text-white">
+  <div class="container">
+    <button class="navbar-toggler btn-lg ml-auto" data-toggle="collapse" data-target="#navid">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navid">
+      <ul class="navbar-nav">
+        <li class="nav-item btn">
+          <a href="#" class="nav-link active"><h2>Home</h2></a>
+        </li>
+        <li class="nav-item btn">
+          <a href="#" class="nav-link"><h2>News</h2></a>
+        </li>
+        <li class="nav-item btn">
+          <a href="#" class="nav-link"><h2>Contact</h2></a>
+        </li>
+        <li class="nav-item btn">
+          <a href="#" class="nav-link"><h2>About</h2></a>
+        </li>
+      </ul>
+      <button class="btn ml-auto nav-link btn-outline-success text-white" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><h2>Bid Login</h2></button>
+
+    </div>  
+  </div>
+</nav>
+
 
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <div class="imgcontainer">
+    <div class="imgcontainer text-center">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="goku.jpg" alt="Avatar" class="avatar">
+      <img src="goku.jpg" style="height:500px;width:500px" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
       <div>
-      <label for="uname"><b>Product_ID</b></label>
+      <label class="h3" for="uname">Product_ID</label>
       <input type="text" placeholder="Enter Product ID" name="uname" required>
       <span class="help-block"><?php echo $user_product_err; ?></span>
       </div>
       <div>
-      <label for="psw"><b>Password</b></label>
+      <label class="h3" for="psw">Password</label>
       <input type="password" placeholder="Enter Password" name="psw" required>
       <span class="help-block"><?php echo $password_err; ?></span> 
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" class="btn btn-primary btn-outline-success btn-lg text-white">Login</button>
       
     </div>
 
@@ -126,17 +168,22 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 
 
 <!--Main Page Starts-->
-<div class="page-header">
+<header class="mb-4 text-center mt-4">
         <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
-</div>
-<div class="flex">
-  <form action="bidreg.php" class="flex-item">
-    <button class="bb-button">Create Bid</button>
-  </form>
-
-  <form action="process.php" class="flex-item">
-    <button class="bb-button">Participate in Bid</button>
-  </form>
+</header>
+<div class="row">
+	<div class="col-sm-12 col-md-6">
+		<form action="bidreg.php" class="p-4 item-hl">
+			<button class="btn btn-outline-success text-white btn-primary btn-block"><h3>Create Bid</h3></button>
+		</form>
+	</div>
+  
+	<div class="col-sm-12 col-md-6">
+		<form action="process.php" class="p-4 item-hl">
+			<button class="btn btn-outline-info text-white btn-primary btn-block"><h3>Participate in Bid</h3></button>
+		</form>
+	</div>
+  
 </div>
 
 
@@ -151,6 +198,10 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
 
 
 </body>
