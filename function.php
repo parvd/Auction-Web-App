@@ -146,12 +146,13 @@ $active="";
 echo "<br>".$d1." ".$t1."<br>";
 echo "<br>";
 
-       $exp = "01-06-2020";  
-       $expt="21:59:59";
+        
+       
        $d1 = new DateTime();
        $today=$d1->format('d-m-Y');
        $t1=$d1->format('H:i:s');
-       //$t1="23:59:59";
+       $exp = $bid_date;//"01-06-2020";
+       $expt="23:59:59";
        $expDate =  date_create($exp);
        $todayDate = date_create($today);
        $diff =  date_diff($todayDate, $expDate);
