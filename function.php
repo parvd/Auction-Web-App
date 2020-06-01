@@ -1,14 +1,13 @@
 <?php
 include_once "config.php";
 session_start();
+date_default_timezone_set("Asia/Calcutta");
 $product_uid=$_SESSION["product"];
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 {
 $usern1=$_SESSION["user"];
 
 $i=0;
-$one="1";
-$zero="0";
 $flag=5;
 $user_p="";
 
@@ -49,7 +48,8 @@ if($stmt = mysqli_prepare($link, $sql)){
                // echo $row3['bid_id'];
                 $own_user=$row3['username'];
                 $ini_price=$row3['product_i_price'];
-                //echo $own_user."<br>".$ini_price."<br>";
+                $bid_date=$row3['bid_date'];
+                //echo $own_user."<br>".$ini_price."<br>".$bid_date;
                 
             }
             else{
@@ -118,9 +118,6 @@ else
   echo "error in prepare stmt6";
  }
 
-
-
-
   }
  }
 
@@ -141,7 +138,37 @@ echo "flag at starting=".$flag;
 <br>
 <br>
 <?php
+echo $bid_date;
+$dateTime = new DateTime();
+$d1=$dateTime->format('Y-m-d');
+$t1=$dateTime->format('H:i:s');//
+$active="";
+echo "<br>".$d1." ".$t1."<br>";
 echo "<br>";
+
+       $exp = "01-06-2020";  
+       $expt="21:59:59";
+       $d1 = new DateTime();
+       $today=$d1->format('d-m-Y');
+       $t1=$d1->format('H:i:s');
+       //$t1="23:59:59";
+       $expDate =  date_create($exp);
+       $todayDate = date_create($today);
+       $diff =  date_diff($todayDate, $expDate);
+       echo $exp." ".$today."\n";
+       if($diff->format("%R%a")==="+0" and $t1<$expt){
+             echo "active\n";
+              $active="active";
+       }else{
+           echo "inactive\n";
+           $active="inactive";
+       }
+       echo "Remaining Days ".$diff->format("%R%a days")."\n";
+
+
+
+
+
 if (mysqli_stmt_execute($stmt3)) {
 ?>
 <table>
@@ -160,10 +187,14 @@ if (mysqli_stmt_execute($stmt3)) {
     <td><?php echo $bidid;?></td>
     <td><?php echo $ini_price;?></td>
     <td>
-    <?php if($own_user===$usern1) 
+    <?php 
+    if($own_user===$usern1) 
     { 
       echo "Input not allowed";
     } 
+    elseif ($active==="inactive"){
+      echo "inactive";
+    }
     else 
     {
     echo $own_user." ".$usern1;
@@ -174,9 +205,6 @@ if (mysqli_stmt_execute($stmt3)) {
   </form>
     <?php
     }
-    
-
-
     ?>
     </td>
 </tr>
